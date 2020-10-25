@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('#sendText').click(sendText);
     $('#checkText').click(sendText);
 
+
     var input = document.getElementById("textinput");
     // Respond to enter key
     input.addEventListener("keyup", function(event) {
@@ -15,12 +16,13 @@ $(document).ready(function () {
         sendText();
       }
     });
-
-
     id=makeid(10);
     console.log("ID:",id);
+    console.log("THIS ONE");
 
 });
+
+
 
 function makeid(length) {
    var result           = '';
@@ -31,6 +33,8 @@ function makeid(length) {
    }
    return result;
 }
+
+
 
 // Function to force scrollable window at bottom
 function updateScroll(){
@@ -55,7 +59,7 @@ function sendText() {
   $.ajax(
     {
     type: "get",
-    url: "/cgi-bin/skon_webchat.py?message=" + message + "&id="+id,
+    url: "/cgi-bin/team5_webchat.py?message=" + message + "&id="+id,
     dataType: "text",
     success:  processResults,
     error: function(request, ajaxOptions, thrownError)
