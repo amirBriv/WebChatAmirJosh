@@ -1,8 +1,10 @@
-var id;
+var id = "";
 
 $(document).ready(function () {
+    setInterval(getMessage, 1000);
     $('#sendText').click(sendText);
-    $('#checkText').click(sendText);
+
+    //$('#checkText').click(sendText);
 
     var input = document.getElementById("textinput");
     // Respond to enter key
@@ -37,7 +39,26 @@ function updateScroll(){
     var element = document.getElementById("chatBox");
     element.scrollTop = element.scrollHeight;
 }
+function getMessage(){
+  console.log("Getting Message")
+  inText = ""
+  // Clear the input text
+  //$('#textinput').val("");
+  updateScroll();
+  message=inText.replace("","+");
 
+  $.ajax(
+    {
+    type: "get",
+    url: "/cgi-bin/skon_webchat.py?message=" + message + "&id="+id,
+    dataType: "text",
+    success:  processResults,
+    error: function(request, ajaxOptions, thrownError)
+    {
+        $("#debug").text("error with get:"+request+thrownError);
+    }
+  });
+}
 
  // Respond to send button
 function sendText() {
