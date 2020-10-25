@@ -12,7 +12,7 @@ import cgi;
 import cgitb
 cgitb.enable()
 
-fifoname="team5chat"  # Unique name for fifos
+fifoname="team5"  # Unique name for fifos
 sendFifoFile = "/home/fifo/"+fifoname+"_sendFifo"
 getFifoFile = "/home/fifo/"+fifoname+"_getFifo"
 def print_header():
