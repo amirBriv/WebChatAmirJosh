@@ -1,10 +1,14 @@
 var id = "";
+userName = "";
 
 $(document).ready(function () {
     $('#sendText').click(sendText);
-    $('#checkText').click(sendText);
+    $('#checkText').click(getMessage);
+    $('#sendName').click(sendName);
 
     var input = document.getElementById("textinput");
+    var name = document.getElementById("userinput");
+
     // Respond to enter key
     input.addEventListener("keyup", function(event) {
       // Number 13 is the "Enter" key on the keyboard
@@ -21,6 +25,13 @@ $(document).ready(function () {
     console.log("ID:",id);
 
 });
+
+function sendName(){
+  console.log("getting name");
+  userName = $('#userinput').val();
+  $('#userinput').val("");
+}
+
 
 function makeid(length) {
    var result           = '';
@@ -61,7 +72,7 @@ function getMessage(){
 function sendText() {
   console.log("sendText");
   // Get the text from the text box
-  inText = $('#textinput').val();
+  inText = userName + ": "+$('#textinput').val();
   // Clear the input text
   $('#textinput').val("");
 
@@ -85,7 +96,7 @@ function sendText() {
 
 function processResults(data) {
   // add to the bottom of the chat box
-  setTimeout(function(){getMessage();}, 2000);
+  //setTimeout(function(){getMessage();}, 2000);
   console.log("got:"+data);
   $('#chatBox').append(data);
 
