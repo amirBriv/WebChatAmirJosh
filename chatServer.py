@@ -16,7 +16,7 @@ def getMessages(id,message):
     # return messages for this ID, plus message from this ID
     result=messages[id]
     if len(message) > 1:
-        result+="You: "+message+"\n"
+        result+=message+"\n"
     messages[id]=""
     # Add message to all other users
     for key in keys:
