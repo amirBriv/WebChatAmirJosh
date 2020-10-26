@@ -1,10 +1,8 @@
 var id = "";
 
 $(document).ready(function () {
-    setInterval(getMessage, 1000);
     $('#sendText').click(sendText);
-
-    //$('#checkText').click(sendText);
+    $('#checkText').click(sendText);
 
     var input = document.getElementById("textinput");
     // Respond to enter key
@@ -44,13 +42,12 @@ function getMessage(){
   inText = ""
   // Clear the input text
   //$('#textinput').val("");
-  updateScroll();
+  //updateScroll();
   message=inText.replace("","+");
-
   $.ajax(
     {
     type: "get",
-    url: "/cgi-bin/skon_webchat.py?message=" + message + "&id="+id,
+    url: "/cgi-bin/team5_webchat.py?message=" + message + "&id="+id,
     dataType: "text",
     success:  processResults,
     error: function(request, ajaxOptions, thrownError)
@@ -76,7 +73,7 @@ function sendText() {
   $.ajax(
     {
     type: "get",
-    url: "/cgi-bin/skon_webchat.py?message=" + message + "&id="+id,
+    url: "/cgi-bin/team5_webchat.py?message=" + message + "&id="+id,
     dataType: "text",
     success:  processResults,
     error: function(request, ajaxOptions, thrownError)
@@ -88,6 +85,8 @@ function sendText() {
 
 function processResults(data) {
   // add to the bottom of the chat box
+  setTimeout(function(){getMessage();}, 2000);
   console.log("got:"+data);
   $('#chatBox').append(data);
+
 }
