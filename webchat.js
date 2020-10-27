@@ -1,5 +1,6 @@
 var id = "";
 userName = "";
+var time;
 
 $(document).ready(function () {
     $('#sendText').click(sendText);
@@ -30,6 +31,21 @@ function sendName(){
   console.log("getting name");
   userName = $('#userinput').val();
   $('#userinput').val("");
+}
+
+function setDate(){
+  var today = new Date()
+  var hour;
+  var amPm;
+  if(today.getHours() > 12){
+    hour = today.getHours()-12
+    amPm = "PM"
+  }
+  if(today.getHours() <= 12){
+    hour = today.getHours()
+    amPm = "PM"
+  }
+  time = "("+hour+":"+today.getMinutes()+" "+amPm+")"
 }
 
 
@@ -71,8 +87,9 @@ function getMessage(){
  // Respond to send button
 function sendText() {
   console.log("sendText");
+  setDate();
   // Get the text from the text box
-  inText = userName + ": "+$('#textinput').val();
+  inText = userName + " "+time+" " + ": "+$('#textinput').val();
   // Clear the input text
   $('#textinput').val("");
 
@@ -95,9 +112,10 @@ function sendText() {
 }
 
 function processResults(data) {
+  //if(data.length > 0 ){ uncomment for auto polling
   // add to the bottom of the chat box
-  //setTimeout(function(){getMessage();}, 2000);
+  //setTimeout(function(){getMessage();}, 2000); uncomment for autopolling
   console.log("got:"+data);
   $('#chatBox').append(data);
-
+  //} uncomment for autopolling
 }
